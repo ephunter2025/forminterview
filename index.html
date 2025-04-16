@@ -3,72 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <title>Form Interview Kandidat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .form-section, .print-section {
+      margin-bottom: 2rem;
+    }
+    .hidden {
+      display: none;
+    }
+    .pdf-layout {
+      border: 1px solid #000;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .pdf-layout h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .pdf-layout table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .pdf-layout table td {
+      padding: 6px;
+      vertical-align: top;
+    }
+    .pdf-layout table td.label {
+      font-weight: bold;
+      width: 30%;
+    }
+  </style>
 </head>
 <body>
+
   <h1>Form Interview Kandidat</h1>
-  <form id="interviewForm">
-    <label>Project Klien:
-      <select name="project_klien" required>
-        <option value="PT GLOBAL BARA MANDIRI">PT GLOBAL BARA MANDIRI</option>
-        <option value="PT TRIFITA PERKASA">PT TRIFITA PERKASA</option>
-        <option value="PT TRIFITA DETO MUARA BADAK">PT TRIFITA DETO MUARA BADAK</option>
-        <option value="PT DAMAI INDAH GOLF">PT DAMAI INDAH GOLF</option>
-      </select>
-    </label><br><br>
 
-    <label>Posisi yang Dilamar: <input type="text" name="posisi_dilamar" required></label><br><br>
+  <div class="form-section">
+    <form id="interviewForm">
+      <!-- All input fields from previous form... -->
+      <label>Project Klien:
+        <select name="project_klien" required>
+          <option value="PT GLOBAL BARA MANDIRI">PT GLOBAL BARA MANDIRI</option>
+          <option value="PT TRIFITA PERKASA">PT TRIFITA PERKASA</option>
+          <option value="PT TRIFITA DETO MUARA BADAK">PT TRIFITA DETO MUARA BADAK</option>
+          <option value="PT DAMAI INDAH GOLF">PT DAMAI INDAH GOLF</option>
+        </select>
+      </label><br><br>
+      <label>Posisi yang Dilamar: <input type="text" name="posisi_dilamar" required></label><br><br>
+      <label>Consultant Interviewer:
+        <select name="consultant" required>
+          <option value="ESP">ESP</option>
+          <option value="MSH">MSH</option>
+          <option value="FAQ">FAQ</option>
+          <option value="RDN">RDN</option>
+        </select>
+      </label><br><br>
+      <label>Nama Kandidat: <input type="text" name="nama_kandidat" required></label><br><br>
+      <label>Usia Kandidat: <input type="number" name="usia_kandidat" required></label><br><br>
+      <label>Pendidikan Kandidat:
+        <select name="pendidikan" required>
+          <option value="SMA/SMK">SMA/SMK</option>
+          <option value="Diploma 3">Diploma 3</option>
+          <option value="Sarjana">Sarjana</option>
+          <option value="Magister">Magister</option>
+        </select>
+      </label><br><br>
+      <label>Pengalaman Kerja Terakhir: <input type="text" name="pengalaman" required></label><br><br>
+      <label>Nama Tempat Kerja Terakhir: <input type="text" name="tempat_kerja" required></label><br><br>
+      <label>Kekuatan Kandidat: <textarea name="kekuatan" required></textarea></label><br><br>
+      <label>Kelemahan Kandidat: <textarea name="kelemahan" required></textarea></label><br><br>
+      <label>Paket Benefit Saat Ini: <input type="text" name="benefit_saat_ini"></label><br><br>
+      <label>Paket Benefit Diharapkan: <input type="text" name="benefit_harapan"></label><br><br>
+      <label>Catatan Khusus Consultant: <textarea name="catatan_khusus"></textarea></label><br><br>
+      <label>Hasil Interview:
+        <select name="hasil_interview" required>
+          <option value="Direkomendasikan">Direkomendasikan</option>
+          <option value="Dipertimbangkan">Dipertimbangkan</option>
+          <option value="Tidak Disarankan">Tidak Disarankan</option>
+        </select>
+      </label><br><br>
 
-    <label>Consultant Interviewer:
-      <select name="consultant" required>
-        <option value="ESP">ESP</option>
-        <option value="MSH">MSH</option>
-        <option value="FAQ">FAQ</option>
-        <option value="RDN">RDN</option>
-      </select>
-    </label><br><br>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="afterSubmit" class="hidden">
+      <h2>Data berhasil disimpan!</h2>
+      <button onclick="window.location.reload()">Mengisi Lagi</button>
+    </div>
+  </div>
 
-    <label>Nama Kandidat: <input type="text" name="nama_kandidat" required></label><br><br>
-    <label>Usia Kandidat: <input type="number" name="usia_kandidat" required></label><br><br>
+  <hr>
 
-    <label>Pendidikan Kandidat:
-      <select name="pendidikan" required>
-        <option value="SMA/SMK">SMA/SMK</option>
-        <option value="Diploma 3">Diploma 3</option>
-        <option value="Sarjana">Sarjana</option>
-        <option value="Magister">Magister</option>
-      </select>
-    </label><br><br>
+  <div class="print-section">
+    <h2>Cetak PDF Interview Kandidat</h2>
+    <label for="namaDropdown">Pilih Nama Kandidat:</label>
+    <select id="namaDropdown">
+      <option value="">--Pilih Nama--</option>
+    </select>
+    <button onclick="loadDataForPrint()">Tampilkan</button>
+    <button onclick="window.print()">Cetak PDF</button>
 
-    <label>Pengalaman Kerja Terakhir: <input type="text" name="pengalaman" required></label><br><br>
-    <label>Nama Tempat Kerja Terakhir: <input type="text" name="tempat_kerja" required></label><br><br>
-
-    <label>Kekuatan Kandidat: <textarea name="kekuatan" required></textarea></label><br><br>
-    <label>Kelemahan Kandidat: <textarea name="kelemahan" required></textarea></label><br><br>
-
-    <label>Paket Benefit Saat Ini: <input type="text" name="benefit_saat_ini"></label><br><br>
-    <label>Paket Benefit Diharapkan: <input type="text" name="benefit_harapan"></label><br><br>
-
-    <label>Catatan Khusus Consultant: <textarea name="catatan_khusus"></textarea></label><br><br>
-
-    <label>Hasil Interview:
-      <select name="hasil_interview" required>
-        <option value="Direkomendasikan">Direkomendasikan</option>
-        <option value="Dipertimbangkan">Dipertimbangkan</option>
-        <option value="Tidak Disarankan">Tidak Disarankan</option>
-      </select>
-    </label><br><br>
-
-    <button type="submit">Submit</button>
-  </form>
-
-  <div id="afterSubmit" style="display:none;">
-    <h2>Data berhasil disimpan!</h2>
-    <button onclick="window.location.reload()">Mengisi Lagi</button>
-    <button onclick="window.print()">Print PDF</button>
+    <div id="pdfContent" class="pdf-layout hidden">
+      <h2>Hasil Interview Kandidat</h2>
+      <table>
+        <tbody id="pdfBody"></tbody>
+      </table>
+    </div>
   </div>
 
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzl11sgTbyzeBj1w8Uq02hSUe-ShnIonI0NL-7v_VglKAvDDZS3JuA8rrfapJpZkWp14g/exec';
+
     const form = document.getElementById('interviewForm');
     const afterSubmit = document.getElementById('afterSubmit');
 
@@ -79,11 +126,60 @@
         body: new FormData(form)
       })
       .then(response => {
-        form.style.display = 'none';
-        afterSubmit.style.display = 'block';
+        form.classList.add('hidden');
+        afterSubmit.classList.remove('hidden');
+        loadNamaKandidat();
       })
       .catch(error => alert('Gagal mengirim data.'));
     });
+
+    const namaDropdown = document.getElementById('namaDropdown');
+    const pdfContent = document.getElementById('pdfContent');
+    const pdfBody = document.getElementById('pdfBody');
+
+    function loadNamaKandidat() {
+      fetch(scriptURL)
+        .then(res => res.json())
+        .then(namaList => {
+          namaDropdown.innerHTML = '<option value="">--Pilih Nama--</option>';
+          namaList.forEach(nama => {
+            const option = document.createElement('option');
+            option.value = nama;
+            option.textContent = nama;
+            namaDropdown.appendChild(option);
+          });
+        });
+    }
+
+    function loadDataForPrint() {
+      const nama = namaDropdown.value;
+      if (!nama) return alert("Pilih nama terlebih dahulu.");
+
+      fetch(`${scriptURL}?nama=${encodeURIComponent(nama)}`)
+        .then(res => res.json())
+        .then(data => {
+          pdfBody.innerHTML = `
+            <tr><td class="label">Project Klien</td><td>${data["project_klien"]}</td></tr>
+            <tr><td class="label">Posisi</td><td>${data["posisi_dilamar"]}</td></tr>
+            <tr><td class="label">Consultant</td><td>${data["consultant"]}</td></tr>
+            <tr><td class="label">Nama Kandidat</td><td>${data["nama_kandidat"]}</td></tr>
+            <tr><td class="label">Usia</td><td>${data["usia_kandidat"]}</td></tr>
+            <tr><td class="label">Pendidikan</td><td>${data["pendidikan"]}</td></tr>
+            <tr><td class="label">Pengalaman</td><td>${data["pengalaman"]}</td></tr>
+            <tr><td class="label">Tempat Kerja</td><td>${data["tempat_kerja"]}</td></tr>
+            <tr><td class="label">Kekuatan</td><td>${data["kekuatan"]}</td></tr>
+            <tr><td class="label">Kelemahan</td><td>${data["kelemahan"]}</td></tr>
+            <tr><td class="label">Benefit Saat Ini</td><td>${data["benefit_saat_ini"]}</td></tr>
+            <tr><td class="label">Benefit Harapan</td><td>${data["benefit_harapan"]}</td></tr>
+            <tr><td class="label">Catatan Consultant</td><td>${data["catatan_khusus"]}</td></tr>
+            <tr><td class="label">Hasil Interview</td><td>${data["hasil_interview"]}</td></tr>
+          `;
+          pdfContent.classList.remove('hidden');
+        });
+    }
+
+    // Load nama saat awal buka
+    window.onload = loadNamaKandidat;
   </script>
 </body>
 </html>
