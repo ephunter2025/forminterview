@@ -159,21 +159,23 @@
         .then(res => res.json())
         .then(data => {
           pdfBody.innerHTML = `
-            <tr><td class="label">Project Klien</td><td>${data["project_klien"]}</td></tr>
-            <tr><td class="label">Posisi</td><td>${data["posisi_dilamar"]}</td></tr>
-            <tr><td class="label">Consultant</td><td>${data["consultant"]}</td></tr>
-            <tr><td class="label">Nama Kandidat</td><td>${data["nama_kandidat"]}</td></tr>
-            <tr><td class="label">Usia</td><td>${data["usia_kandidat"]}</td></tr>
-            <tr><td class="label">Pendidikan</td><td>${data["pendidikan"]}</td></tr>
-            <tr><td class="label">Pengalaman</td><td>${data["pengalaman"]}</td></tr>
-            <tr><td class="label">Tempat Kerja</td><td>${data["tempat_kerja"]}</td></tr>
-            <tr><td class="label">Kekuatan</td><td>${data["kekuatan"]}</td></tr>
-            <tr><td class="label">Kelemahan</td><td>${data["kelemahan"]}</td></tr>
-            <tr><td class="label">Benefit Saat Ini</td><td>${data["benefit_saat_ini"]}</td></tr>
-            <tr><td class="label">Benefit Harapan</td><td>${data["benefit_harapan"]}</td></tr>
-            <tr><td class="label">Catatan Consultant</td><td>${data["catatan_khusus"]}</td></tr>
-            <tr><td class="label">Hasil Interview</td><td>${data["hasil_interview"]}</td></tr>
-          `;
+            pdfBody.innerHTML = `
+              <tr><td class="label">Project Klien</td><td>${data["Project Klien"] || ""}</td></tr>
+              <tr><td class="label">Posisi</td><td>${data["Posisi yang dilamar"] || ""}</td></tr>
+              <tr><td class="label">Consultant</td><td>${data["Consultant Interviewer"] || ""}</td></tr>
+              <tr><td class="label">Nama Kandidat</td><td>${data["Nama Kandidat"] || ""}</td></tr>
+              <tr><td class="label">Usia</td><td>${data["Usia Kandidat"] || ""}</td></tr>
+              <tr><td class="label">Pendidikan</td><td>${data["Pendidikan Kandidat"] || ""}</td></tr>
+              <tr><td class="label">Pengalaman</td><td>${data["Penglaman Kerja Terakhir (Posisi dan level)"] || ""}</td></tr>
+              <tr><td class="label">Tempat Kerja</td><td>${data["Nama Tempat Kerja Terakhir (Nama Perusahaan)"] || ""}</td></tr>
+              <tr><td class="label">Kekuatan</td><td>${data["Kekuatan Kandidat (Hard Skill & Soft Skill)"] || ""}</td></tr>
+              <tr><td class="label">Kelemahan</td><td>${data["Kelemahan Kandidat (Hard Skill & Soft Skill)"] || ""}</td></tr>
+              <tr><td class="label">Benefit Saat Ini</td><td>${data["Paket Benefit Saat ini"] || ""}</td></tr>
+              <tr><td class="label">Benefit Harapan</td><td>${data["Paket Benefit yang diharapkan"] || ""}</td></tr>
+              <tr><td class="label">Catatan Consultant</td><td>${data["Catatan Khusus Consultant"] || ""}</td></tr>
+              <tr><td class="label">Hasil Interview</td><td>${data["Hasil Interview"] || ""}</td></tr>
+            `;
+
           pdfContent.classList.remove('hidden');
         });
     }
